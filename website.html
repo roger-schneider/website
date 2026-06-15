@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roger Schneider — Journalist</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f8f6;
+      --text: #1a1a1a;
+      --muted: #6b6b6b;
+      --accent: #c0392b;
+      --border: #e0ddd8;
+      --max-w: 720px;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 1.5rem 2rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    header p.tagline {
+      margin-top: 0.4rem;
+      color: var(--muted);
+      font-size: 1rem;
+      font-style: italic;
+    }
+
+    nav {
+      margin-top: 1.2rem;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    /* ── Layout ── */
+    main {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+    }
+
+    section {
+      margin-top: 3.5rem;
+    }
+
+    section h2 {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── About ── */
+    #about p {
+      font-size: 1.05rem;
+      max-width: 60ch;
+    }
+
+    /* ── Article cards ── */
+    .article-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .article {
+      border-top: 1px solid var(--border);
+      padding: 1.4rem 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem 1.5rem;
+      align-items: start;
+    }
+
+    .article:last-child { border-bottom: 1px solid var(--border); }
+
+    .article-meta {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .article h3 {
+      font-size: 1.1rem;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .article h3 a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .article h3 a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .article p.summary {
+      margin-top: 0.4rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .article-tag {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: var(--border);
+      color: var(--muted);
+      padding: 0.25rem 0.55rem;
+      border-radius: 2px;
+      white-space: nowrap;
+      align-self: start;
+    }
+
+    /* ── Embed area ── */
+    .embed-card {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .embed-card figcaption {
+      padding: 0.75rem 1rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    .embed-card iframe {
+      display: block;
+      width: 100%;
+      border: none;
+    }
+
+    .embed-placeholder {
+      background: #f0ede8;
+      height: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.85rem;
+    }
+
+    .embed-placeholder .icon {
+      font-size: 1.8rem;
+      opacity: 0.4;
+    }
+
+    /* ── Contact ── */
+    #contact p {
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    #contact a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--text);
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    #contact a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Roger Schneider</h1>
+    <p class="tagline">Journalist &amp; Reporter</p>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ── About ── -->
+    <section id="about">
+      <h2>About</h2>
+      <p>
+        I report on [your beat — e.g. politics, tech, culture]. My work has appeared in
+        [Publication A], [Publication B], and [Publication C]. I am based in [City].
+      </p>
+    </section>
+
+    <!-- ── Selected Work ── -->
+    <section id="work">
+      <h2>Selected Work</h2>
+      <div class="article-list">
+
+        <article class="article">
+          <div>
+            <p class="article-meta">Publication Name &middot; Month Year</p>
+            <h3><a href="https://example.com/article-1" target="_blank" rel="noopener">
+              Your First Article Headline Goes Here
+            </a></h3>
+            <p class="summary">
+              A one- or two-sentence description of what the piece is about and why it matters.
+            </p>
+          </div>
+          <span class="article-tag">Investigative</span>
+        </article>
+
+        <article class="article">
+          <div>
+            <p class="article-meta">Publication Name &middot; Month Year</p>
+            <h3><a href="https://example.com/article-2" target="_blank" rel="noopener">
+              Your Second Article Headline Goes Here
+            </a></h3>
+            <p class="summary">
+              A one- or two-sentence description of what the piece is about and why it matters.
+            </p>
+          </div>
+          <span class="article-tag">Feature</span>
+        </article>
+
+        <article class="article">
+          <div>
+            <p class="article-meta">Publication Name &middot; Month Year</p>
+            <h3><a href="https://example.com/article-3" target="_blank" rel="noopener">
+              Your Third Article Headline Goes Here
+            </a></h3>
+            <p class="summary">
+              A one- or two-sentence description of what the piece is about and why it matters.
+            </p>
+          </div>
+          <span class="article-tag">News</span>
+        </article>
+
+        <article class="article">
+          <div>
+            <p class="article-meta">Publication Name &middot; Month Year</p>
+            <h3><a href="https://example.com/article-4" target="_blank" rel="noopener">
+              Your Fourth Article Headline Goes Here
+            </a></h3>
+            <p class="summary">
+              A one- or two-sentence description of what the piece is about and why it matters.
+            </p>
+          </div>
+          <span class="article-tag">Opinion</span>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ── Featured / Embeds ── -->
+    <section id="features">
+      <h2>Featured Pieces</h2>
+
+      <!--
+        To embed an article, replace the embed-placeholder div with an <iframe>
+        pointing to the article URL (if the site allows iframe embedding), or use
+        a service like Pym.js / Flourish / Data Wrapper for interactive graphics.
+
+        Example iframe embed:
+        <iframe src="https://example.com/your-article" height="400"></iframe>
+
+        For a PDF, you can embed it like this:
+        <iframe src="your-article.pdf" height="500"></iframe>
+      -->
+
+      <figure class="embed-card">
+        <div class="embed-placeholder">
+          <span class="icon">&#9654;</span>
+          <span>Paste an iframe embed or link a PDF here</span>
+        </div>
+        <figcaption>Article or multimedia title &mdash; Publication, Year</figcaption>
+      </figure>
+
+      <figure class="embed-card">
+        <div class="embed-placeholder">
+          <span class="icon">&#9654;</span>
+          <span>Paste an iframe embed or link a PDF here</span>
+        </div>
+        <figcaption>Article or multimedia title &mdash; Publication, Year</figcaption>
+      </figure>
+
+    </section>
+
+    <!-- ── Contact ── -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>
+        Available for assignments, collaborations, and tips.<br />
+        <a href="mailto:roger.tom@web.de">roger.tom@web.de</a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; 2026 Roger Schneider
+  </footer>
+
+</body>
+</html>
