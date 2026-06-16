@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="format-detection" content="telephone=no" />
   <title>Roger Schneider — Journalist</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -158,6 +159,17 @@
       0%, 100% { opacity: 0.25; width: 48px; }
       50%       { opacity: 0.7;  width: 64px; }
     }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-label  { animation: fade-up 0.6s ease both; animation-delay: 0.15s; }
+    .hero-line-1 { display: block; animation: fade-up 0.7s ease both; animation-delay: 0.45s; }
+    .hero-line-2 { display: block; animation: fade-up 0.7s ease both; animation-delay: 0.95s; }
+    .hero-bio    { animation: fade-up 0.7s ease both; animation-delay: 1.4s; }
+    .hero-scroll { animation: fade-up 0.6s ease both; animation-delay: 1.8s; }
 
     /* ── Section shell ── */
     .section-inner {
@@ -373,13 +385,30 @@
 
     .cv-extra { display: none; }
 
-    .cv-show-wrap {
-      text-align: center;
-      margin-top: 2.5rem;
-      margin-bottom: 3rem;
+    .cv-bottom {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 3rem;
     }
 
-    .cv-dl-wrap { margin-top: 1rem; }
+    .cv-show-wrap { display: contents; }
+
+    .btn-text {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--muted);
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.18s;
+    }
+
+    .btn-text:hover { color: var(--accent); }
 
     .btn-primary {
       display: inline-flex;
@@ -513,7 +542,6 @@
     <a href="#hero" class="nav-name">Roger Schneider</a>
     <ul class="nav-links" id="nav-links">
       <li><a href="#work">Work</a></li>
-      <li><a href="#video">Video</a></li>
       <li><a href="#cv">CV</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -526,7 +554,7 @@
   <section id="hero">
     <div class="hero-inner">
       <p class="hero-label">Journalism, Data &amp; Policy</p>
-      <h1>Hi,<br>I'm Roger</h1>
+      <h1><span class="hero-line-1">Hi,</span><span class="hero-line-2">I'm Roger</span></h1>
       <p class="hero-bio">
         A trained journalist with editorial experience across 5+ media outlets.
         Currently pursuing an MPA in Data Science for Public Policy at the
@@ -668,6 +696,91 @@
           </div>
           <span class="article-tag">Politics</span>
         </li>
+
+        <li class="article extra">
+          <div class="article-date">
+            <span class="article-pub">Der Spiegel</span>
+            March 2025
+          </div>
+          <div>
+            <h3><a href="https://www.spiegel.de/wissenschaft/technik/serbien-was-ist-die-schallwaffe-und-wie-funktioniert-sie-a-487a3410-abac-44ce-a3eb-0102b213a491" target="_blank" rel="noopener">Der Schall als Waffe</a></h3>
+            <p class="summary">A shrill, loud sound, followed by panic: A sound weapon is said to have been used during an anti-government demonstration in Serbia. Here’s what is known about the incident and the devices.</p>
+          </div>
+          <span class="article-tag">Tech</span>
+        </li>
+
+        <li class="article extra">
+          <div class="article-date">
+            <span class="article-pub">Der Spiegel</span>
+            March 2025
+          </div>
+          <div>
+            <h3><a href="https://www.spiegel.de/panorama/familiennachzug-aus-nigeria-wie-sharon-o-um-ihre-kinder-bangt-a-227d7f7d-fc4a-41ad-a1c1-49289596efbb" target="_blank" rel="noopener">Was zwei Kinder in Nigeria und die Koalitionsverhandlungen verbindet</a></h3>
+            <p class="summary">Eligibility for subsidiary protection, suspension of family reunification: For many people, these are just complicated terms. For Sharon O. from Nigeria, they determine whether she can bring her children here.</p>
+          </div>
+          <span class="article-tag">Politics</span>
+        </li>
+
+        <li class="article extra">
+          <div class="article-date">
+            <span class="article-pub">Der Spiegel</span>
+            March 2025
+          </div>
+          <div>
+            <h3><a href="https://www.spiegel.de/politik/deutschland/demonstrationen-gegen-friedrich-merz-und-afd-heiko-giebler-ueber-die-wirkung-der-proteste-a-508790af-b323-406b-acad-986b189baf7c" target="_blank" rel="noopener">Können die Proteste zu einem Problem für die CDU werden?</a></h3>
+            <p class="summary">Across the country, hundreds of thousands are taking to the streets to protest against Friedrich Merz and the AfD. A political scientist explains what impact the demonstrations could have—and what the CDU should do differently.</p>
+          </div>
+          <span class="article-tag">Politics</span>
+        </li>
+
+        <li class="article extra">
+          <div class="article-date">
+            <span class="article-pub">Der Spiegel</span>
+            November 2022
+          </div>
+          <div>
+            <h3><a href="https://www.spiegel.de/wirtschaft/einweg-e-zigaretten-suesser-dampf-mit-suchtpotenzial-a-76043f89-955d-4a3d-b31e-9d72208329be" target="_blank" rel="noopener">Das Geschäft mit dem süßen Dampf</a></h3>
+            <p class="summary">Vapes were long considered a niche product. But now, disposable vaporizers from China are taking German schoolyards by storm. The industry is thrilled, while youth advocates and environmental experts are alarmed.</p>
+          </div>
+          <span class="article-tag">Business</span>
+        </li>
+        
+        <li class="article extra">
+          <div class="article-date">
+            <span class="article-pub">Der Spiegel</span>
+            September 2022
+          </div>
+          <div>
+            <h3><a href="https://www.spiegel.de/wirtschaft/unternehmen/baecker-restaurants-schreiner-wie-die-inflation-kleine-betriebe-bedroht-a-1be29474-39a6-4cda-8b79-2db67971f1ff" target="_blank" rel="noopener">»Ich weiß nicht, wie wir das auffangen sollen«</a></h3>
+            <p class="summary">First COVID-19, now rising energy costs: Bakeries, restaurants, and carpenters are struggling through yet another crisis, and many are once again at their breaking point. How much longer can this go on?</p>
+          </div>
+          <span class="article-tag">Business</span>
+        </li>
+
+        <li class="article extra">
+          <div class="article-date">
+            <span class="article-pub">Der Spiegel</span>
+            September 2022
+          </div>
+          <div>
+            <h3><a href="https://www.spiegel.de/wirtschaft/oel-gas-strom-wie-teuer-energie-wirklich-ist-a-17781c8a-26ad-4d18-9057-164bc210da15" target="_blank" rel="noopener">So unterschiedlich werden Gas, Öl und Kohle bewertet</a></h3>
+            <p class="summary">Prices on the commodity markets are all over the place. A megawatt-hour of energy can cost anywhere from 230 to 51 euros—depending on how it’s generated. This has little to do with its actual value—here’s an overview.</p>
+          </div>
+          <span class="article-tag">Economics</span>
+        </li>
+
+        <li class="article extra">
+          <div class="article-date">
+            <span class="article-pub">Der Spiegel</span>
+            August 2022
+          </div>
+          <div>
+            <h3><a href="https://www.spiegel.de/wirtschaft/niedrigwasser-im-rhein-wenn-deutschlands-wirtschaft-trocken-laeuft-a-1c89a7b8-dcb4-4153-a068-68143ede86ba" target="_blank" rel="noopener">Wenn Deutschlands Wirtschaft trockenläuft</a></h3>
+            <p class="summary">The Rhine is considered a vital lifeline for the local economy. The prolonged drought has caused water levels to drop so low that the crisis, which was already looming, could become even worse. Can the railroad help?</p>
+          </div>
+          <span class="article-tag">Economics</span>
+        </li>
+
         
 
       </ul>
@@ -701,7 +814,7 @@
       <p class="section-label">What I've done so far</p>
       <div class="cv-grid">
 
-        <div>
+        <div id="cv-exp-col">
           <p class="cv-col-label">Experience</p>
 
           <div class="cv-entry">
@@ -753,7 +866,7 @@
           </div>
         </div>
 
-        <div>
+        <div id="cv-edu-col">
           <p class="cv-col-label">Education</p>
 
           <div class="cv-entry">
@@ -807,18 +920,16 @@
             <p class="cv-title">German Academic Exchange Service</p>
             <p class="cv-sub">PROMOS Scholarship for Semester Abroad</p>
           </div>
+
         </div>
 
       </div>
 
-      <div class="cv-show-wrap" id="cv-show-wrap">
-        <button class="btn-ghost" id="cv-show-btn">Show All</button>
-      </div>
-
-      <div class="cv-dl-wrap">
-        <a href="CV_Website.pdf" class="btn-primary" download="Roger_Schneider_CV.pdf">
-          &#8595; Download CV
-        </a>
+      <div class="cv-bottom">
+        <div class="cv-show-wrap" id="cv-show-wrap">
+          <button class="btn-ghost" id="cv-show-btn">Show all</button>
+        </div>
+        <a href="CV_Website.pdf" class="btn-primary" download="Roger_Schneider_CV.pdf">&#8595; Download CV</a>
       </div>
     </div>
   </section>
