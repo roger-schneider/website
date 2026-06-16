@@ -13,110 +13,216 @@
       --muted: #6b6b6b;
       --accent: #c0392b;
       --border: #e0ddd8;
-      --max-w: 720px;
+      --dark: #111110;
+      --dark-text: #f5f3f0;
+      --inner: 1160px;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Georgia', serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.7;
+      overflow-x: hidden;
     }
 
-    /* ── Header ── */
-    header {
-      border-bottom: 1px solid var(--border);
-      padding: 3rem 1.5rem 2rem;
-      max-width: var(--max-w);
-      margin: 0 auto;
-    }
-
-    header h1 {
-      font-size: 2rem;
-      font-weight: 400;
-      letter-spacing: -0.02em;
-    }
-
-    header p.tagline {
-      margin-top: 0.4rem;
-      color: var(--muted);
-      font-size: 1rem;
-      font-style: italic;
-    }
-
-    nav {
-      margin-top: 1.2rem;
+    /* ── Fixed Nav ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
       display: flex;
-      gap: 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4rem;
+      height: 56px;
+      background: rgba(249, 248, 246, 0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
     }
 
-    nav a {
+    .nav-name {
       font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--muted);
       text-decoration: none;
       transition: color 0.15s;
     }
 
-    nav a:hover { color: var(--accent); }
+    .nav-links a:hover { color: var(--accent); }
 
-    /* ── Layout ── */
-    main {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 1.5rem 5rem;
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
     }
 
-    section {
-      margin-top: 3.5rem;
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text);
+      margin: 5px 0;
+      transition: transform 0.25s, opacity 0.25s;
     }
 
-    section h2 {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-    /* ── About ── */
-    #about p {
-      font-size: 1.05rem;
-      max-width: 60ch;
-    }
-
-    /* ── Article cards ── */
-    .article-list {
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      background: var(--dark);
+      color: var(--dark-text);
       display: flex;
       flex-direction: column;
-      gap: 0;
+      justify-content: center;
+      padding: 0 4rem;
     }
+
+    .hero-inner {
+      max-width: var(--inner);
+      margin: 0 auto;
+      width: 100%;
+      padding-top: 56px;
+    }
+
+    .hero-label {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    #hero h1 {
+      font-size: clamp(3.2rem, 9vw, 7rem);
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      line-height: 1.02;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-bio {
+      max-width: 50ch;
+      font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+      line-height: 1.85;
+      color: rgba(245, 243, 240, 0.62);
+    }
+
+    .hero-scroll {
+      margin-top: 4.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(245, 243, 240, 0.3);
+    }
+
+    .hero-scroll-line {
+      width: 48px;
+      height: 1px;
+      background: rgba(245, 243, 240, 0.25);
+      animation: breathe 2.4s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 0.25; width: 48px; }
+      50%       { opacity: 0.7;  width: 64px; }
+    }
+
+    /* ── Section shell ── */
+    .section-inner {
+      max-width: var(--inner);
+      margin: 0 auto;
+      padding: 0 4rem;
+    }
+
+    .section-label {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-bottom: 1.2rem;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Work ── */
+    #work {
+      padding: 7rem 0 6rem;
+    }
+
+    ul.article-list { list-style: none; }
 
     .article {
-      border-top: 1px solid var(--border);
-      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 0;
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 0.5rem 1.5rem;
+      grid-template-columns: 180px 1fr auto;
+      gap: 0 3rem;
       align-items: start;
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
-    .article:last-child { border-bottom: 1px solid var(--border); }
+    .article.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-    .article-meta {
+    .article.extra { display: none; }
+
+    .article-date {
       font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 0.72rem;
-      color: var(--muted);
+      font-size: 0.7rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      margin-bottom: 0.3rem;
+      color: var(--muted);
+      padding-top: 0.2rem;
+      line-height: 1.6;
+    }
+
+    .article-pub {
+      display: block;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.15rem;
+      letter-spacing: 0;
     }
 
     .article h3 {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: 400;
       line-height: 1.4;
     }
@@ -125,7 +231,7 @@
       color: var(--text);
       text-decoration: none;
       border-bottom: 1px solid transparent;
-      transition: border-color 0.15s, color 0.15s;
+      transition: color 0.15s, border-color 0.15s;
     }
 
     .article h3 a:hover {
@@ -134,79 +240,202 @@
     }
 
     .article p.summary {
-      margin-top: 0.4rem;
+      margin-top: 0.5rem;
       font-size: 0.9rem;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     .article-tag {
       font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 0.68rem;
-      letter-spacing: 0.06em;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      background: var(--border);
+      border: 1px solid var(--border);
       color: var(--muted);
-      padding: 0.25rem 0.55rem;
+      padding: 0.28rem 0.65rem;
       border-radius: 2px;
       white-space: nowrap;
       align-self: start;
+      margin-top: 0.25rem;
     }
 
-    /* ── Embed area ── */
-    .embed-card {
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-      margin-bottom: 2rem;
+    .show-more-wrap {
+      text-align: center;
+      margin-top: 3.5rem;
     }
 
-    .embed-card figcaption {
-      padding: 0.75rem 1rem;
+    .btn-ghost {
       font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 0.78rem;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: none;
+      border: 1px solid var(--text);
+      color: var(--text);
+      padding: 0.8rem 2.2rem;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
     }
 
-    .embed-card iframe {
-      display: block;
+    .btn-ghost:hover {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    /* ── Video ── */
+    #video {
+      background: var(--dark);
+      padding: 7rem 0;
+      color: var(--dark-text);
+    }
+
+    #video .section-label {
+      color: rgba(245, 243, 240, 0.35);
+      border-bottom-color: rgba(245, 243, 240, 0.1);
+    }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: 3px;
+      overflow: hidden;
+      background: #1e1e1c;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
       width: 100%;
+      height: 100%;
       border: none;
     }
 
-    .embed-placeholder {
-      background: #f0ede8;
-      height: 280px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      color: var(--muted);
+    .video-caption {
+      margin-top: 1.1rem;
       font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.72rem;
+      color: rgba(245, 243, 240, 0.35);
+      letter-spacing: 0.04em;
     }
 
-    .embed-placeholder .icon {
-      font-size: 1.8rem;
-      opacity: 0.4;
+    /* ── CV ── */
+    #cv {
+      padding: 7rem 0 6rem;
     }
+
+    .cv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .cv-col-label {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .cv-entry {
+      padding-left: 1.1rem;
+      border-left: 2px solid var(--border);
+      margin-bottom: 2rem;
+      transition: border-color 0.18s;
+    }
+
+    .cv-entry:hover { border-left-color: var(--accent); }
+
+    .cv-year {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.67rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .cv-title {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .cv-sub {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    .cv-extra { display: none; }
+
+    .cv-show-wrap {
+      text-align: center;
+      margin-top: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .cv-dl-wrap { margin-top: 1rem; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--text);
+      color: var(--bg);
+      text-decoration: none;
+      padding: 0.85rem 2.2rem;
+      border-radius: 1px;
+      transition: background 0.18s;
+    }
+
+    .btn-primary:hover { background: var(--accent); }
 
     /* ── Contact ── */
-    #contact p {
-      font-size: 1rem;
-      color: var(--muted);
+    #contact {
+      padding: 7rem 0;
+      background: #edeae5;
     }
 
-    #contact a {
+    #contact h2 {
+      font-size: clamp(2.2rem, 5.5vw, 4.5rem);
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    #contact .contact-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 44ch;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .email-link {
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
       color: var(--text);
       text-decoration: none;
       border-bottom: 1px solid var(--text);
+      padding-bottom: 2px;
       transition: color 0.15s, border-color 0.15s;
     }
 
-    #contact a:hover {
+    .email-link:hover {
       color: var(--accent);
       border-bottom-color: var(--accent);
     }
@@ -214,148 +443,461 @@
     /* ── Footer ── */
     footer {
       border-top: 1px solid var(--border);
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 1.5rem 1.5rem;
+      padding: 1.8rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       color: var(--muted);
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .nav { padding: 0 1.5rem; }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 56px; left: 0; right: 0;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        padding: 1.5rem 1.5rem 2rem;
+        gap: 1.4rem;
+      }
+
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+
+      #hero { padding: 0 1.5rem; }
+
+      .section-inner { padding: 0 1.5rem; }
+
+      .article {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+      }
+
+      .article-date { order: -1; }
+
+      .article-tag {
+        width: fit-content;
+        margin-top: 0.8rem;
+      }
+
+      .cv-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      footer {
+        padding: 1.5rem;
+        flex-direction: column;
+        gap: 0.4rem;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #hero h1 { font-size: 2.8rem; }
+      #work, #video, #cv, #contact { padding: 5rem 0; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Roger Schneider</h1>
-    <p class="tagline">Journalist &amp; Reporter</p>
-    <nav>
-      <a href="#work">Work</a>
-      <a href="#features">Features</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+  <!-- ── Fixed Nav ── -->
+  <nav class="nav" id="main-nav">
+    <a href="#hero" class="nav-name">Roger Schneider</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#video">Video</a></li>
+      <li><a href="#cv">CV</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-  <main>
-
-    <!-- ── About ── -->
-    <section id="about">
-      <h2>About</h2>
-      <p>
-        I report on [your beat — e.g. politics, tech, culture]. My work has appeared in
-        [Publication A], [Publication B], and [Publication C]. I am based in [City].
+  <!-- ── Hero ── -->
+  <section id="hero">
+    <div class="hero-inner">
+      <p class="hero-label">Journalism, Data &amp; Policy</p>
+      <h1>Hi,<br>I'm Roger</h1>
+      <p class="hero-bio">
+        A trained journalist with editorial experience across 5+ media outlets.
+        Currently pursuing an MPA in Data Science for Public Policy at the
+        London School of Economics. Fluent in English and Spanish, native in German.
+        Combining analytical and journalistic skills to find the stories that matter.
       </p>
-    </section>
+      <div class="hero-scroll">
+        <span class="hero-scroll-line"></span>
+        Scroll to explore
+      </div>
+    </div>
+  </section>
 
-    <!-- ── Selected Work ── -->
-    <section id="work">
-      <h2>Selected Work</h2>
-      <div class="article-list">
+  <!-- ── Selected Work ── -->
+  <section id="work">
+    <div class="section-inner">
+      <p class="section-label">Selected Work</p>
+      <ul class="article-list">
 
-        <article class="article">
+        <li class="article">
+          <div class="article-date">
+            <span class="article-pub">Der Spiegel</span>
+            May 2025
+          </div>
           <div>
-            <p class="article-meta">DER SPIEGEL &middot; May 2025</p>
             <h3><a href="https://www.spiegel.de/panorama/aussetzung-des-familiennachzugs-nicht-ohne-meine-familie-a-678a98bd-853f-4720-ac0c-7ae4046a813e" target="_blank" rel="noopener">
               Nicht ohne meine Familie
             </a></h3>
-            <p class="summary">
-              A one- or two-sentence description of what the piece is about and why it matters.
-            </p>
+            <p class="summary">The Federal Cabinet plans to vote on suspending family reunification for beneficiaries of subsidiary protection. Those affected are worried about their relatives. In their desperation, they are pinning their hopes on the German bureaucracy.</p>
           </div>
-          <span class="article-tag">Investigative</span>
-        </article>
+          <span class="article-tag">Politics</span>
+        </li>
 
-        <article class="article">
-          <div>
-            <p class="article-meta">Publication Name &middot; Month Year</p>
-            <h3><a href="https://example.com/article-2" target="_blank" rel="noopener">
-              Your Second Article Headline Goes Here
-            </a></h3>
-            <p class="summary">
-              A one- or two-sentence description of what the piece is about and why it matters.
-            </p>
+        <li class="article">
+          <div class="article-date">
+            <span class="article-pub">DER SPIEGEL</span>
+            April 2025
           </div>
-          <span class="article-tag">Feature</span>
-        </article>
+          <div>
+            <h3><a href= "https://www.spiegel.de/panorama/gesellschaft/cannabis-gesetz-aufatmen-und-weiterkiffen-a-454eba66-5692-445c-8749-992fe00a5e17" target="_blank" rel="noopener">Aufatmen und weiterkiffen</a></h3>
+            <p class="summary">The partial legalization of cannabis remains in place for now, but it seems like a compromise with an expiry date. What do cultivation associations and consumers have to say about this?</p>
+          </div>
+          <span class="article-tag">Politics</span>
+        </li>
 
-        <article class="article">
-          <div>
-            <p class="article-meta">Publication Name &middot; Month Year</p>
-            <h3><a href="https://example.com/article-3" target="_blank" rel="noopener">
-              Your Third Article Headline Goes Here
-            </a></h3>
-            <p class="summary">
-              A one- or two-sentence description of what the piece is about and why it matters.
-            </p>
+        <li class="article">
+          <div class="article-date">
+            <span class="article-pub">DER SPIEGEL</span>
+            March 2025
           </div>
-          <span class="article-tag">News</span>
-        </article>
+          <div>
+            <h3><a href="https://www.spiegel.de/geschichte/us-armee-bildhistoriker-warnt-vor-loeschung-von-diversitaetsfotos-durch-donald-trumps-regierung-a-538ecec2-5785-4bfc-8688-5b5e552a9308" target="_blank" rel="noopener">»Was in den USA passiert, ist für die künftige Geschichtsschreibung sehr problematisch«</a></h3>
+            <p class="summary">The U.S. military is removing tens of thousands of photos from its websites—at the behest of the Trump administration. This could create illusions in the collective memory of the United States, warns a visual historian.</p>
+          </div>
+          <span class="article-tag">Politics</span>
+        </li>
 
-        <article class="article">
-          <div>
-            <p class="article-meta">Publication Name &middot; Month Year</p>
-            <h3><a href="https://example.com/article-4" target="_blank" rel="noopener">
-              Your Fourth Article Headline Goes Here
-            </a></h3>
-            <p class="summary">
-              A one- or two-sentence description of what the piece is about and why it matters.
-            </p>
+        <li class="article">
+          <div class="article-date">
+            <span class="article-pub">Süddeutsche Zeitung</span>
+            May 2024
           </div>
-          <span class="article-tag">Opinion</span>
-        </article>
+          <div>
+            <h3><a href="https://www.sueddeutsche.de/wirtschaft/rwe-asbest-grossbritannien-source-material-kraftwerke-lungenkrebs-1.7112090?reduced=true" target="_blank" rel="noopener">RWEs tödliche Altlast</a></h3>
+            <p class="summary">Employees at RWE's UK facilities were exposed to asbestos. Decades later, the workers are falling ill and suing for damages. Yet the DAX company often remains unyielding.</p>
+          </div>
+          <span class="article-tag">Investigation</span>
+        </li>
+
+        <li class="article">
+          <div class="article-date">
+            <span class="article-pub">Harvard Business Manager</span>
+            October 2024
+          </div>
+          <div>
+            <h3><a href="https://www.manager-magazin.de/hbm/mehr-digitalisierung-dank-altersdiversitaet-a-020a1107-9090-4a2e-ae99-6ce2ac995849" target="_blank" rel="noopener">Hey Boomer, wie funktioniert mein PC?</a></h3>
+            <p class="summary">It is commonly believed that age differences hinder digital transformation in companies. A recent study shows the opposite: targeted training programs can actually turn age diversity into a driver of new technologies.</p>
+          </div>
+          <span class="article-tag">Business</span>
+        </li>
+
+        <!-- Articles 6+ are hidden until "Show all" is clicked -->
+        <li class="article extra">
+          <div class="article-date">
+            <span class="article-pub">Der Stern</span>
+            September 2024
+          </div>
+          <div>
+            <h3><a href="https://www.stern.de/gesellschaft/neue-grenzkontrollen--der-erste-tag-am-uebergang-nach-belgien-35068576.html" target="_blank" rel="noopener">Tag eins der neuen Grenzkontrollen: Bloß niemanden stören</a></h3>
+            <p class="summary">Border controls have been in place at all German borders—including those in the west. The first day of a new era? Not quite. Impressions from the border triangle with the Netherlands and Belgium.</p>
+          </div>
+          <span class="article-tag">Politics</span>
+        </li>
+
+        <li class="article extra">
+          <div class="article-date">
+            <span class="article-pub">Frankfurter Allgemeine Sonntagszeitung</span>
+            August 2024
+          </div>
+          <div>
+            <h3><a href="Hier können Sie das Bezahlen vergessen" target="_blank" rel="noopener">Hier können Sie das Bezahlen vergessen</a></h3>
+            <p class="summary">In some supermarkets, cameras track purchases, so no one has to wait in line at the checkout. But customers are giving away quite a bit of information.</p>
+          </div>
+          <span class="article-tag">Tech</span>
+        </li>
+
+        <li class="article extra">
+          <div class="article-date">
+            <span class="article-pub">Der Stern</span>
+            October 2024
+          </div>
+          <div>
+            <h3><a href="https://www.stern.de/gesellschaft/prozess-in-koeln--15-jaehriger-erstochen---weil-er-einen-dealer-verriet--35184716.html" target="_blank" rel="noopener">15-Jähriger erstochen – weil er gegen einen Drogendealer aussagte?</a></h3>
+            <p class="summary">A 15-year-old boy was found stabbed to death along the Rhine. Now the trial of four defendants has begun—amid chaotic scenes.</p>
+          </div>
+          <span class="article-tag">Crime</span>
+        </li>
+
+        <li class="article extra">
+          <div class="article-date">
+            <span class="article-pub">Der Stern</span>
+            January 2025
+          </div>
+          <div>
+            <h3><a href="https://www.stern.de/gesellschaft/-moench-von-luetzerath--gesteht---dann-spricht-er-von-gandhi-35404374.html" target="_blank" rel="noopener">"Mönch von Lützerath" gesteht – dann spricht er von Gandhi und Olaf Scholz</a></h3>
+            <p class="summary">Known as the “Monk of Lützerath,” Loïc S. has become a symbol of the climate movement. The Frenchman has been on trial in a German court since Wednesday. At the start of the trial, he delivered a lengthy statement.</p>
+          </div>
+          <span class="article-tag">Crime</span>
+        </li>
+
+        <li class="article extra">
+          <div class="article-date">
+            <span class="article-pub">Der Stern</span>
+            October 2024
+          </div>
+          <div>
+            <h3><a href="OB Reker macht Cannabis-Legalisierung für Drogenkrieg in Köln mitverantwortlich" target="_blank" rel="noopener">OB Reker macht Cannabis-Legalisierung für Drogenkrieg in Köln mitverantwortlich</a></h3>
+            <p class="summary">Explosions keep occurring in Cologne. Mayor Henriette Reker is urging people to remain calm—and sees a link to the legalization of cannabis. </p>
+          </div>
+          <span class="article-tag">Politics</span>
+        </li>
+        
+
+      </ul>
+
+      <div class="show-more-wrap" id="show-more-wrap">
+        <button class="btn-ghost" id="show-all-btn">Show more</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Video ── -->
+  <section id="video">
+    <div class="section-inner">
+      <p class="section-label">Video</p>
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/GHBIbrE6_SM"
+          referrerpolicy="strict-origin-when-cross-origin"
+          title="YouTube video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <p class="video-caption">The rapid expansion of rental scooters across Berlin has an unwanted side effect: Dozens end up on the ground of the Spree river—endangering the ecosystem with their poisonous batteries. Jan Ebel frequently sets out to pull them out of the water himself, but the authorities hinder his work &mdash; Berliner Abendschau / rbb, 2021</p>
+    </div>
+  </section>
+
+  <!-- ── CV ── -->
+  <section id="cv">
+    <div class="section-inner">
+      <p class="section-label">What I've done so far</p>
+      <div class="cv-grid">
+
+        <div>
+          <p class="cv-col-label">Experience</p>
+
+          <div class="cv-entry">
+            <p class="cv-year">08/2024 – 08/2025</p>
+            <p class="cv-title">Der Spiegel</p>
+            <p class="cv-sub">News Editor — Newsdesk</p>
+          </div>
+
+          <div class="cv-entry">
+            <p class="cv-year">02/2024 – 04/2024</p>
+            <p class="cv-title">Süddeutsche Zeitung</p>
+            <p class="cv-sub">Intern — Investigative Editorial</p>
+          </div>
+
+          <div class="cv-entry">
+            <p class="cv-year">11/2022 – 04/2023</p>
+            <p class="cv-title">Boston Consulting Group</p>
+            <p class="cv-sub">Working Student — External Communications &amp; Marketing</p>
+          </div>
+
+          <div class="cv-entry cv-extra">
+            <p class="cv-year">02/2023 – 04/2023</p>
+            <p class="cv-title">Federal Foreign Office of Germany</p>
+            <p class="cv-sub">Intern — Strategic Communications (Ref. 607)</p>
+          </div>
+
+          <div class="cv-entry cv-extra">
+            <p class="cv-year">08/2022 – 09/2022</p>
+            <p class="cv-title">Der Spiegel</p>
+            <p class="cv-sub">Intern — Business Editorial</p>
+          </div>
+
+          <div class="cv-entry cv-extra">
+            <p class="cv-year">11/2021 – 10/2022</p>
+            <p class="cv-title">Westdeutscher Rundfunk (WDR)</p>
+            <p class="cv-sub">Working Student — Lokalzeit aus Köln</p>
+          </div>
+
+          <div class="cv-entry cv-extra">
+            <p class="cv-year">08/2021 – 10/2021</p>
+            <p class="cv-title">Rundfunk Berlin-Brandenburg (rbb)</p>
+            <p class="cv-sub">Intern — Berliner Abendschau</p>
+          </div>
+
+          <div class="cv-entry cv-extra">
+            <p class="cv-year">02/2021 – 04/2021</p>
+            <p class="cv-title">Ostthüringer Zeitung</p>
+            <p class="cv-sub">Intern - Regional section for Jena</p>
+          </div>
+        </div>
+
+        <div>
+          <p class="cv-col-label">Education</p>
+
+          <div class="cv-entry">
+            <p class="cv-year">09/2025 – exp. 06/2027</p>
+            <p class="cv-title">London School of Economics</p>
+            <p class="cv-sub">MPA in Data Science for Public Policy</p>
+          </div>
+
+          <div class="cv-entry">
+            <p class="cv-year">10/2021 – 01/2025</p>
+            <p class="cv-title">University of Cologne</p>
+            <p class="cv-sub">BSc in Management, Economics and Social Science</p>
+          </div>
+
+          <div class="cv-entry">
+            <p class="cv-year">10/2020 – 01/2025</p>
+            <p class="cv-title">Cologne School of Political and Business Journalism</p>
+            <p class="cv-sub">Journalism Training</p>
+          </div>
+
+          <div class="cv-entry cv-extra">
+            <p class="cv-year">07/2023 – 12/2023</p>
+            <p class="cv-title">Universidad Torcuato Di Tella</p>
+            <p class="cv-sub">Semester Abroad — Buenos Aires, Argentina</p>
+          </div>
+
+          <div class="cv-entry cv-extra">
+            <p class="cv-year">2011 – 2019</p>
+            <p class="cv-title">Gymnasium Rodenkirchen</p>
+            <p class="cv-sub">Abitur</p>
+          </div>
+        </div>
+
+        <div>
+          <p class="cv-col-label">Scholarships</p>
+
+          <div class="cv-entry">
+            <p class="cv-year">09/2025 – 06/2027</p>
+            <p class="cv-title">German Academic Exchange Service</p>
+            <p class="cv-sub">Full Scholarship for Master's in the UK</p>
+          </div>
+
+          <div class="cv-entry">
+            <p class="cv-year">09/2025 – 06/2027</p>
+            <p class="cv-title">Rudolf Augstein Foundation</p>
+            <p class="cv-sub">Journalism Scholarship</p>
+          </div>
+
+          <div class="cv-entry">
+            <p class="cv-year">07/2023 – 12/2023</p>
+            <p class="cv-title">German Academic Exchange Service</p>
+            <p class="cv-sub">PROMOS Scholarship for Semester Abroad</p>
+          </div>
+        </div>
 
       </div>
-    </section>
 
-    <!-- ── Featured / Embeds ── -->
-    <section id="features">
-      <h2>Featured Pieces</h2>
+      <div class="cv-show-wrap" id="cv-show-wrap">
+        <button class="btn-ghost" id="cv-show-btn">Show All</button>
+      </div>
 
-      <!--
-        To embed an article, replace the embed-placeholder div with an <iframe>
-        pointing to the article URL (if the site allows iframe embedding), or use
-        a service like Pym.js / Flourish / Data Wrapper for interactive graphics.
+      <div class="cv-dl-wrap">
+        <a href="CV_Website.pdf" class="btn-primary" download="Roger_Schneider_CV.pdf">
+          &#8595; Download CV
+        </a>
+      </div>
+    </div>
+  </section>
 
-        Example iframe embed:
-        <iframe src="https://example.com/your-article" height="400"></iframe>
-
-        For a PDF, you can embed it like this:
-        <iframe src="your-article.pdf" height="500"></iframe>
-      -->
-
-      <figure class="embed-card">
-        <div class="embed-placeholder">
-          <span class="icon">&#9654;</span>
-          <span>Paste an iframe embed or link a PDF here</span>
-        </div>
-        <figcaption>Article or multimedia title &mdash; Publication, Year</figcaption>
-      </figure>
-
-      <figure class="embed-card">
-        <div class="embed-placeholder">
-          <span class="icon">&#9654;</span>
-          <span>Paste an iframe embed or link a PDF here</span>
-        </div>
-        <figcaption>Article or multimedia title &mdash; Publication, Year</figcaption>
-      </figure>
-
-    </section>
-
-    <!-- ── Contact ── -->
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>
-        Available for assignments, collaborations, and tips.<br />
-        <a href="mailto:roger.tom@web.de">roger.tom@web.de</a>
-      </p>
-    </section>
-
-  </main>
+  <!-- ── Contact ── -->
+  <section id="contact">
+    <div class="section-inner">
+      <h2>Get in touch</h2>
+      <p class="contact-sub">Available for assignments, collaborations, and tips.</p>
+      <div class="contact-links">
+        <a href="mailto:roger.schneider@kjskoeln.de" class="email-link">Email</a>
+        <a href="https://www.linkedin.com/in/roger-s-7a3066221/" class="email-link" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    &copy; 2026 Roger Schneider
+    <span>&copy; 2026 Roger Schneider</span>
+    <span>Journalist &amp; Data Reporter</span>
   </footer>
+
+  <script>
+    // ── Hamburger toggle ──
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks  = document.getElementById('nav-links');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      navToggle.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.classList.remove('open');
+      });
+    });
+
+    // ── Scroll-in animation for first 5 articles ──
+    const visibleArticles = document.querySelectorAll('.article:not(.extra)');
+    const scrollObserver = new IntersectionObserver((entries) => {
+      let delay = 0;
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.transitionDelay = delay + 'ms';
+          entry.target.classList.add('visible');
+          scrollObserver.unobserve(entry.target);
+          delay += 90;
+        }
+      });
+    }, { threshold: 0.08 });
+    visibleArticles.forEach(a => scrollObserver.observe(a));
+
+    // ── Show all articles ──
+    document.getElementById('show-all-btn').addEventListener('click', () => {
+      const extras = document.querySelectorAll('.article.extra');
+      extras.forEach((el, i) => {
+        el.classList.remove('extra');
+        // Double RAF ensures the element is painted before the transition fires
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          el.style.transitionDelay = (i * 100) + 'ms';
+          el.classList.add('visible');
+        }));
+      });
+      document.getElementById('show-more-wrap').style.display = 'none';
+    });
+
+    // ── Show full CV ──
+    document.getElementById('cv-show-btn').addEventListener('click', () => {
+      document.querySelectorAll('.cv-extra').forEach(el => el.classList.remove('cv-extra'));
+      document.getElementById('cv-show-wrap').style.display = 'none';
+    });
+
+    // ── Nav opacity on scroll ──
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.style.background = window.scrollY > 60
+        ? 'rgba(249, 248, 246, 0.97)'
+        : 'rgba(249, 248, 246, 0.88)';
+    }, { passive: true });
+  </script>
 
 </body>
 </html>
